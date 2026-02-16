@@ -11,10 +11,14 @@
             "id": "addc18f3b9c9b511",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Herbalism-Vault/03_Preparations/Salve%20Guide.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Salve%20Guide"
             }
           }
         ]
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Herbalism-Vault/03_Preparations/Salve%20Guide.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for Salve%20Guide"
             }
           },
           {
@@ -108,11 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Herbalism-Vault/03_Preparations/Salve%20Guide.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links"
+              "title": "Outgoing links from Salve%20Guide"
             }
           },
           {
@@ -150,12 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Herbalism-Vault/03_Preparations/Salve%20Guide.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Salve%20Guide"
             }
           }
         ]
@@ -177,5 +184,42 @@
     }
   },
   "active": "addc18f3b9c9b511",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "White Yarrow.md",
+    "Herbalism-Vault/00_Indexes/Companion%20Guilds%20Index.md",
+    "Herbalism-Vault/00_Indexes/Master Plant Index.md",
+    "Templates/Plant Template.md",
+    "Templates",
+    "Quick Start Guides/Raised Bed Plan (4x8).md",
+    "Quick Start Guides/Grocery Savings Plan.md",
+    "Quick Start Guides/Beginner Herb Garden.md",
+    "Quick Start Guides/10 Easiest Crops.md",
+    "Quick Start Guides",
+    "Master-Indexes/Zone 7B Calendar (All Crops).md",
+    "Master-Indexes/Soil & Nutrient Map.md",
+    "Master-Indexes/Pollinator Network.md",
+    "Master-Indexes/Companion Matrix.md",
+    "Master-Indexes",
+    "Vegetable-Vault/01_Crops/Lettuce.md",
+    "Vegetable-Vault/01_Crops/Garlic.md",
+    "Vegetable-Vault/03_Rotation/Light Feeders.md",
+    "Vegetable-Vault/03_Rotation/Nitrogen Fixers.md",
+    "Vegetable-Vault/03_Rotation/Heavy Feeders.md",
+    "Vegetable-Vault/01_Crops/Tomato.md",
+    "Vegetable-Vault/01_Crops/Squash.md",
+    "Vegetable-Vault/01_Crops/Pepper.md",
+    "Vegetable-Vault/01_Crops/Onion.md",
+    "Vegetable-Vault/01_Crops/Carrot.md",
+    "Vegetable-Vault/02_Planting/Warm Season.md",
+    "Vegetable-Vault/02_Planting/Cool Season.md",
+    "Vegetable-Vault/00_Indexes/Master Crop Index.md",
+    "Vegetable-Vault/00_Indexes/Feeding Requirements.md",
+    "Vegetable-Vault/03_Rotation",
+    "Vegetable-Vault/01_Crops",
+    "Vegetable-Vault/02_Planting",
+    "Vegetable-Vault/00_Indexes",
+    "Vegetable-Vault",
+    "Herbalism-Vault/_config",
+    "Herbalism-Vault/05_Months"
+  ]
 }

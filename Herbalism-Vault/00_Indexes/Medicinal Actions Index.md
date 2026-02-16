@@ -1,56 +1,192 @@
-# 🏥 Medicinal Actions Index
+﻿# Medicinal Actions Index
 
-Organize herbs by their primary health-supporting actions.
+Organized from plant note metadata and tags.
 
----
+## [[Digestive Support]]
 
-## 🍽️ [[Digestive Support]]
+- [[Anise]]
+- [[Basil]]
+- [[Blue Vervain]]
+- [[Borage]]
+- [[Burdock]]
+- [[Caraway]]
+- [[Cardamom]]
+- [[Chamomile]]
+- [[Chives]]
+- [[Cilantro]]
+- [[Dandelion]]
+- [[Dill]]
+- [[Fennel]]
+- [[Flaxseed]]
+- [[Ginger]]
+- [[Goldenseal]]
+- [[Horehound]]
+- [[Italian Basil]]
+- [[Juniper]]
+- [[Lemon]]
+- [[Lemon Mint]]
+- [[Licorice]]
+- [[Lovage]]
+- [[Marjoram]]
+- [[Marshmallow]]
+- [[Milk Thistle]]
+- [[Mountain Mint]]
+- [[Oregano]]
+- [[Parsley]]
+- [[Peach]]
+- [[Pennyroyal]]
+- [[Peppermint]]
+- [[Plantain]]
+- [[Purple Basil]]
+- [[Raspberry]]
+- [[Rose Hips]]
+- [[Sage]]
+- [[Slippery Elm]]
+- [[Summer Savory]]
+- [[Thai Basil]]
+- [[Turmeric]]
+- [[Wild Yam]]
 
-Carminative, antispasmodic, bitter tonic.
+## [[Nervine & Calming]]
 
-[[Anise]] • [[Fennel]] • [[Caraway]] • [[Dill]] • [[Peppermint]] • [[Cilantro]] • [[Summer Savory]] • [[Chamomile]] • [[Marjoram]]
+- [[Ashwagandha]]
+- [[Bergamot]]
+- [[Blue Vervain]]
+- [[Catnip]]
+- [[Chamomile]]
+- [[Feverfew]]
+- [[Ginseng]]
+- [[Gotu Kola]]
+- [[Holy Basil]]
+- [[Lavender]]
+- [[Lemon Balm]]
+- [[Lemon Mint]]
+- [[Linden]]
+- [[Marjoram]]
+- [[Matcha (Tea Plant)]]
+- [[Mimosa]]
+- [[Monarda]]
+- [[Motherwort]]
+- [[Oats]]
+- [[Passionflower]]
+- [[Peppermint]]
+- [[Poppy]]
+- [[Rhodiola]]
+- [[Rose]]
+- [[Skullcap]]
+- [[St. John's Wort]]
+- [[Valerian]]
+- [[Woodruff]]
 
----
+## [[Respiratory Support]]
 
-## 🧠 [[Nervine & Calming]]
+- [[Anise]]
+- [[Bergamot]]
+- [[Elderberry]]
+- [[Eucalyptus]]
+- [[Fennel]]
+- [[Holy Basil]]
+- [[Horehound]]
+- [[Horseradish]]
+- [[Hyssop]]
+- [[Licorice]]
+- [[Linden]]
+- [[Marshmallow]]
+- [[Monarda]]
+- [[Mountain Mint]]
+- [[Mullein]]
+- [[Nasturtium]]
+- [[Onion]]
+- [[Peach]]
+- [[Pine]]
+- [[Slippery Elm]]
+- [[Thyme]]
+- [[White Yarrow]]
+- [[Yarrow]]
 
-Supports anxiety, sleep, stress regulation.
+## [[Antimicrobial Herbs]]
 
-[[Lavender]] • [[Lemon Balm]] • [[Catnip]] • [[Chamomile]] • [[Marjoram]]
+- [[Bergamot]]
+- [[Clove]]
+- [[Echinacea]]
+- [[Elderberry]]
+- [[Eucalyptus]]
+- [[Garlic]]
+- [[Geranium]]
+- [[Goldenseal]]
+- [[Horseradish]]
+- [[Hyssop]]
+- [[Lavender]]
+- [[Lemon Balm]]
+- [[Monarda]]
+- [[Nasturtium]]
+- [[Onion]]
+- [[Oregano]]
+- [[Peppermint]]
+- [[Pine]]
+- [[Rosemary]]
+- [[Sage]]
+- [[Summer Savory]]
+- [[Tea Tree]]
+- [[Thyme]]
 
----
+## [[Wound & Circulation]]
 
-## 🫁 [[Respiratory Support]]
+- [[Aloe]]
+- [[Arnica]]
+- [[Borage]]
+- [[Calendula]]
+- [[Capsicum]]
+- [[Chives]]
+- [[Comfrey]]
+- [[Garlic]]
+- [[Geranium]]
+- [[Ginkgo]]
+- [[Gotu Kola]]
+- [[Hawthorn]]
+- [[Hibiscus]]
+- [[Horse Chestnut]]
+- [[Lady's Mantle]]
+- [[Lavender]]
+- [[Marigold]]
+- [[Motherwort]]
+- [[Plantain]]
+- [[Rose]]
+- [[Rosemary]]
+- [[Self-Heal]]
+- [[St. John's Wort]]
+- [[White Yarrow]]
+- [[Willow]]
+- [[Wintergreen]]
+- [[Witch Hazel]]
+- [[Yarrow]]
 
-Supports lung function, expectorant action.
+## [[Immune and Adaptogen Support]]
 
-[[Hyssop]] • [[Horehound]] • [[Thyme]] • [[Oregano]] • [[Sage]] • [[Echinacea]] • [[Anise]]
-
----
-
-## 🛡️ [[Antimicrobial Herbs]]
-
-Antibacterial, antiviral, antifungal properties.
-
-[[Oregano]] • [[Thyme]] • [[Rosemary]] • [[Sage]] • [[Echinacea]] • [[Summer Savory]]
-
----
-
-## 🩹 [[Wound & Circulation]]
-
-Wound healing, tissue repair, circulatory support.
-
-[[Lavender]] • [[White Yarrow]] • [[Echinacea]] • [[Sage]]
-
----
+- [[Ashwagandha]]
+- [[Astragalus]]
+- [[Bergamot]]
+- [[Calendula]]
+- [[Echinacea]]
+- [[Elderberry]]
+- [[Eleuthero]]
+- [[Garlic]]
+- [[Ginseng]]
+- [[Holy Basil]]
+- [[Lemon]]
+- [[Lemon Balm]]
+- [[Monarda]]
+- [[Rhodiola]]
+- [[Rose Hips]]
+- [[Self-Heal]]
+- [[Stinging Nettle]]
 
 ## Quick Navigation
 
-- See all herbs: [[Master Plant Index]]
-- Plan your garden: [[Month-by-Month Calendar (Zone 7B)]]
-- Explore plant colors: [[Color & Energetics Index]]
-- Group by companion: [[Companion Guilds Index]]
+- [[Master Plant Index]]
+- [[Container & Controlled Climate Herbs]]
+- [[Companion Guilds Index]]
+- [[Color & Energetics Index]]
+- [[Month-by-Month Calendar (Zone 7B)]]
 
----
-
-**Tip:** Most herbs support multiple actions. Click individual herbs to see full profiles.
+**Last Updated:** February 16, 2026

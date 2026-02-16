@@ -18,19 +18,24 @@ Tags: #respiratory #immune #perennial
 # Monarda
 
 ## Growing Conditions
-Same core group as bergamot.
+Prefers Full-partial sun conditions, with Well-drained, organic matter as needed soil and Moderate unless noted moisture.
 
 ## Planting Calendar (Zone 7B)
-Start in spring after frost risk unless this species is typically fall-planted. For tender species, use containers and move indoors before first frost.
+Start: Spring (Zone 7B)
+Harvest: Seasonal by plant part
+See [[Month-by-Month Calendar (Zone 7B)]] for timing details.
 
 ## Size and Spacing
-Follow cultivar-specific spacing; most herbs perform best with airflow and no overcrowding.
+Height: Varies by cultivar/site
+Spread: Varies by cultivar/site
 
 ## Medicinal Actions
-- Antimicrobial, Diaphoretic, Nervine
-- See 02_Apothecary notes for formula context and contraindications.
+- Antimicrobial
+- Diaphoretic
+- Nervine
 
 ## Companion Plants
+- [[Companion Guilds Index]]
 - [[Calendula]]
 - [[Yarrow]]
 - [[Chamomile]]
@@ -38,12 +43,21 @@ Follow cultivar-specific spacing; most herbs perform best with airflow and no ov
 ## Avoid
 - Waterlogged soil
 - Poor airflow
+- Mismatched water-needs neighbors
 
 ## Preparations
-- Tea or decoction (plant-part dependent)
-- Tincture
-- Infused oil/salve (primarily for topical herbs)
+- [[Tea Infusion Guide]]
+- [[Tincture Guide]]
+- [[Salve Guide]]
+- [[Syrup Guide]]
 
 ## Ecological Role
-Supports biodiversity through nectar, habitat, and/or soil function depending on species.
+Supports garden ecology through habitat, pollinator support, and companion diversity based on placement.
 
+## Related Graph Links
+- [[Respiratory Support]]
+- [[Master Plant Index]]
+- [[Medicinal Actions Index]]
+- [[Companion Guilds Index]]
+- [[Color & Energetics Index]]
+- [[Month-by-Month Calendar (Zone 7B)]]

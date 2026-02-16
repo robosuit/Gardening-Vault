@@ -20,8 +20,23 @@
               "icon": "lucide-file",
               "title": "Salve%20Guide"
             }
+          },
+          {
+            "id": "ce9f7e19dfd5c00d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Herbalism-Vault/00_Indexes/Master Plant Index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Master Plant Index"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -183,43 +198,43 @@
       "bases:Create new base": false
     }
   },
-  "active": "addc18f3b9c9b511",
+  "active": "ce9f7e19dfd5c00d",
   "lastOpenFiles": [
-    "White Yarrow.md",
-    "Herbalism-Vault/00_Indexes/Companion%20Guilds%20Index.md",
+    "Herbalism-Vault/01_Plants/Raspberry.md",
+    "Herbalism-Vault/01_Plants/Pennyroyal.md",
+    "Herbalism-Vault/01_Plants/Ginseng.md",
+    "Herbalism-Vault/01_Plants/Anise.md",
     "Herbalism-Vault/00_Indexes/Master Plant Index.md",
-    "Templates/Plant Template.md",
+    "Herbalism-Vault/01_Plants/Horehound.md",
+    "Herbalism-Vault/01_Plants/Horse Chestnut.md",
+    "Herbalism-Vault/01_Plants/Chamomile.md",
+    "Herbalism-Vault/01_Plants/Basil.md",
+    "Herbalism-Vault/01_Plants/Lady's Mantle.md",
+    "Herbalism-Vault/01_Plants/Rose.md",
+    "Herbalism-Vault/01_Plants/Slippery Elm.md",
+    "Herbalism-Vault/01_Plants/Willow.md",
+    "White Yarrow.md",
+    "Herbalism-Vault/01_Plants/Black Cohosh.md",
+    "Herbalism-Vault/01_Plants/White Yarrow.md",
+    "Herbalism-Vault/01_Plants/Yarrow.md",
+    "Herbalism-Vault/01_Plants/Blue Vervain.md",
+    "Herbalism-Vault/01_Plants/Bergamot.md",
+    "Herbalism-Vault/00_Indexes/Container & Controlled Climate Herbs.md",
+    "Herbalism-Vault/01_Plants/Peppermint.md",
+    "Herbalism-Vault/02_Apothecary/Immune and Adaptogen Support.md",
+    "Herbalism-Vault/01_Plants/Borage.md",
+    "Herbalism-Vault/scripts/normalize_vault.ps1",
+    "Herbalism-Vault/_config/graph-logic.md",
+    "START HERE.md",
+    "Herbalism-Vault/01_Plants/Lavender.md",
     "Templates",
-    "Quick Start Guides/Raised Bed Plan (4x8).md",
-    "Quick Start Guides/Grocery Savings Plan.md",
-    "Quick Start Guides/Beginner Herb Garden.md",
-    "Quick Start Guides/10 Easiest Crops.md",
     "Quick Start Guides",
-    "Master-Indexes/Zone 7B Calendar (All Crops).md",
-    "Master-Indexes/Soil & Nutrient Map.md",
-    "Master-Indexes/Pollinator Network.md",
-    "Master-Indexes/Companion Matrix.md",
     "Master-Indexes",
-    "Vegetable-Vault/01_Crops/Lettuce.md",
-    "Vegetable-Vault/01_Crops/Garlic.md",
-    "Vegetable-Vault/03_Rotation/Light Feeders.md",
-    "Vegetable-Vault/03_Rotation/Nitrogen Fixers.md",
-    "Vegetable-Vault/03_Rotation/Heavy Feeders.md",
-    "Vegetable-Vault/01_Crops/Tomato.md",
-    "Vegetable-Vault/01_Crops/Squash.md",
-    "Vegetable-Vault/01_Crops/Pepper.md",
-    "Vegetable-Vault/01_Crops/Onion.md",
-    "Vegetable-Vault/01_Crops/Carrot.md",
-    "Vegetable-Vault/02_Planting/Warm Season.md",
-    "Vegetable-Vault/02_Planting/Cool Season.md",
-    "Vegetable-Vault/00_Indexes/Master Crop Index.md",
-    "Vegetable-Vault/00_Indexes/Feeding Requirements.md",
     "Vegetable-Vault/03_Rotation",
     "Vegetable-Vault/01_Crops",
     "Vegetable-Vault/02_Planting",
     "Vegetable-Vault/00_Indexes",
     "Vegetable-Vault",
-    "Herbalism-Vault/_config",
-    "Herbalism-Vault/05_Months"
+    "Herbalism-Vault/_config"
   ]
 }

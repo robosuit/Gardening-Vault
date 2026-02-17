@@ -1,3 +1,57 @@
-# Feeding Requirements
+﻿# Feeding Requirements
 
-Lists N-P-K tendencies and soil needs per crop.
+## Heavy Feeders
+- [[Vegetable-Vault/01_Crops/Broccoli]]
+- [[Vegetable-Vault/01_Crops/Brussels Sprouts]]
+- [[Vegetable-Vault/01_Crops/Cabbage]]
+- [[Vegetable-Vault/01_Crops/Cantaloupe]]
+- [[Vegetable-Vault/01_Crops/Cauliflower]]
+- [[Vegetable-Vault/01_Crops/Celery]]
+- [[Vegetable-Vault/01_Crops/Corn Sweet]]
+- [[Vegetable-Vault/01_Crops/Cucumber]]
+- [[Vegetable-Vault/01_Crops/Eggplant]]
+- [[Vegetable-Vault/01_Crops/Gourd]]
+- [[Vegetable-Vault/01_Crops/Luffa]]
+- [[Vegetable-Vault/01_Crops/Pepper]]
+- [[Vegetable-Vault/01_Crops/Potato]]
+- [[Vegetable-Vault/01_Crops/Pumpkin]]
+- [[Vegetable-Vault/01_Crops/Squash]]
+- [[Vegetable-Vault/01_Crops/Sugarcane]]
+- [[Vegetable-Vault/01_Crops/Sweet Potato]]
+- [[Vegetable-Vault/01_Crops/Tomato]]
+- [[Vegetable-Vault/01_Crops/Watermelon]]
+- [[Vegetable-Vault/01_Crops/Winter Squash]]
+- [[Vegetable-Vault/01_Crops/Zucchini]]
+
+## Medium Feeders
+- [[Vegetable-Vault/01_Crops/Asparagus]]
+- [[Vegetable-Vault/01_Crops/Bean Lima]]
+- [[Vegetable-Vault/01_Crops/Collards]]
+- [[Vegetable-Vault/01_Crops/Garlic]]
+- [[Vegetable-Vault/01_Crops/Kale]]
+- [[Vegetable-Vault/01_Crops/Kohlrabi]]
+- [[Vegetable-Vault/01_Crops/Leek]]
+- [[Vegetable-Vault/01_Crops/Okra]]
+- [[Vegetable-Vault/01_Crops/Onion]]
+- [[Vegetable-Vault/01_Crops/Rutabaga]]
+- [[Vegetable-Vault/01_Crops/Sunchoke]]
+- [[Vegetable-Vault/01_Crops/Swiss Chard]]
+
+## Light Feeders
+- [[Vegetable-Vault/01_Crops/Beet]]
+- [[Vegetable-Vault/01_Crops/Carrot]]
+- [[Vegetable-Vault/01_Crops/Daikon Radish]]
+- [[Vegetable-Vault/01_Crops/Lettuce]]
+- [[Vegetable-Vault/01_Crops/Mustard Greens]]
+- [[Vegetable-Vault/01_Crops/Parsley]]
+- [[Vegetable-Vault/01_Crops/Parsnip]]
+- [[Vegetable-Vault/01_Crops/Radish]]
+- [[Vegetable-Vault/01_Crops/Red Beet]]
+- [[Vegetable-Vault/01_Crops/Spinach]]
+- [[Vegetable-Vault/01_Crops/Turnip]]
+
+## Nitrogen Fixers
+- [[Vegetable-Vault/01_Crops/Bean Bush]]
+- [[Vegetable-Vault/01_Crops/Bean Pole]]
+- [[Vegetable-Vault/01_Crops/Pea]]
+- [[Vegetable-Vault/01_Crops/Southern Pea]]

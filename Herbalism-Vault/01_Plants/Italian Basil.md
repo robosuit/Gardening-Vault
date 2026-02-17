@@ -1,18 +1,30 @@
 ﻿---
 Type: Herb
+Category: Herb
 Family: Lamiaceae
 Life Cycle: Annual
 Height: Varies by cultivar/site
 Spread: Varies by cultivar/site
+Root Depth: Varies by species
 Sun: Full sun
 Soil: Well-drained, organic matter as needed
 Water: Moderate unless noted
 Zone: 6-8 (annual)
+Start Method: Start indoors 6-8 weeks before target planting; direct sow species that dislike transplanting.
 Start Month: Spring (Zone 7B)
+Days to Germination: 7-21 days
+Bloom Days: 60-90 days
+Bloom Speed Tier: Fast
 Harvest: Seasonal by plant part
 Primary Actions: Digestive, Aromatic
 Energetics: Context dependent
-Tags: #digestive #annual #warming
+Pollinator Value: High
+Nectar Level: High
+Pollen Level: Moderate
+Indoor Bloom Viable: Limited
+Feeding Level: Low-Moderate
+Companion Group: Herb Guild
+Tags: #digestive #annual #warming #bloom-fast #pollinator-high
 ---
 
 # Italian Basil
@@ -60,3 +72,16 @@ Supports garden ecology through habitat, pollinator support, and companion diver
 - [[Companion Guilds Index]]
 - [[Color & Energetics Index]]
 - [[Month-by-Month Calendar (Zone 7B)]]
+
+## Seed Starting and Bloom Timing
+- Start method: Start indoors 6-8 weeks before target planting; direct sow species that dislike transplanting.
+- Days to germination: 7-21 days
+- Bloom from seed: 60-90 days
+- Bloom speed tier: Fast
+- Indoor bloom viability: Limited
+
+
+
+
+
+

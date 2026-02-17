@@ -1,18 +1,30 @@
 ﻿---
 Type: Flower
+Category: Herb
 Family: Asteraceae
 Life Cycle: Annual
 Height: Varies by cultivar/site
 Spread: Varies by cultivar/site
+Root Depth: Varies by species
 Sun: Full sun
 Soil: Well-drained, organic matter as needed
 Water: Moderate unless noted
 Zone: 2-11
+Start Method: Start indoors 4-6 weeks before planting; needs strong light and warmth.
 Start Month: Spring (Zone 7B)
+Days to Germination: 7-14 days
+Bloom Days: 75-95 days
+Bloom Speed Tier: Moderate
 Harvest: Seasonal by plant part
 Primary Actions: Pollinator support, Mild traditional use
 Energetics: Context dependent
-Tags: #annual #pollinators
+Pollinator Value: High
+Nectar Level: High
+Pollen Level: Moderate
+Indoor Bloom Viable: Limited
+Feeding Level: Low-Moderate
+Companion Group: Herb Guild
+Tags: #annual #pollinators #bloom-moderate #pollinator-high
 ---
 
 # Tithonia
@@ -59,3 +71,16 @@ Supports garden ecology through habitat, pollinator support, and companion diver
 - [[Companion Guilds Index]]
 - [[Color & Energetics Index]]
 - [[Month-by-Month Calendar (Zone 7B)]]
+
+## Seed Starting and Bloom Timing
+- Start method: Start indoors 4-6 weeks before planting; needs strong light and warmth.
+- Days to germination: 7-14 days
+- Bloom from seed: 75-95 days
+- Bloom speed tier: Moderate
+- Indoor bloom viability: Limited
+
+
+
+
+
+

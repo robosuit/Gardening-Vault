@@ -1,18 +1,30 @@
 ﻿---
 Type: Flower
+Category: Herb
 Family: Asteraceae
 Life Cycle: Annual
 Height: Varies by cultivar/site
 Spread: Varies by cultivar/site
+Root Depth: Varies by species
 Sun: Full sun
 Soil: Well-drained, organic matter as needed
 Water: Moderate unless noted
 Zone: 2-11
+Start Method: Start indoors 4-6 weeks before transplant or direct sow in trays.
 Start Month: Spring (Zone 7B)
+Days to Germination: 5-10 days
+Bloom Days: 35-50 days
+Bloom Speed Tier: Elite
 Harvest: Seasonal by plant part
 Primary Actions: Vulnerary, Lymphatic, Anti-inflammatory
 Energetics: Context dependent
-Tags: #wound #immune #annual #yellow
+Pollinator Value: High
+Nectar Level: Moderate
+Pollen Level: High
+Indoor Bloom Viable: Yes
+Feeding Level: Low-Moderate
+Companion Group: Herb Guild
+Tags: #wound #immune #annual #yellow #bloom-elite #pollinator-high
 ---
 
 # Calendula
@@ -61,3 +73,16 @@ Supports garden ecology through habitat, pollinator support, and companion diver
 - [[Companion Guilds Index]]
 - [[Color & Energetics Index]]
 - [[Month-by-Month Calendar (Zone 7B)]]
+
+## Seed Starting and Bloom Timing
+- Start method: Start indoors 4-6 weeks before transplant or direct sow in trays.
+- Days to germination: 5-10 days
+- Bloom from seed: 35-50 days
+- Bloom speed tier: Elite
+- Indoor bloom viability: Yes
+
+
+
+
+
+

@@ -1,18 +1,30 @@
 ﻿---
 Type: Herb
+Category: Herb
 Family: Tropaeolaceae
 Life Cycle: Annual
 Height: Varies by cultivar/site
 Spread: Varies by cultivar/site
+Root Depth: Varies by species
 Sun: Full-partial sun
 Soil: Well-drained, organic matter as needed
 Water: Moderate unless noted
 Zone: 2-11
+Start Method: Direct sow or start in larger cells to reduce transplant shock.
 Start Month: Spring (Zone 7B)
+Days to Germination: 7-10 days
+Bloom Days: 35-50 days
+Bloom Speed Tier: Elite
 Harvest: Seasonal by plant part
 Primary Actions: Antimicrobial, Expectorant
 Energetics: Context dependent
-Tags: #antimicrobial #respiratory #annual
+Pollinator Value: High
+Nectar Level: High
+Pollen Level: Moderate
+Indoor Bloom Viable: Yes
+Feeding Level: Low-Moderate
+Companion Group: Herb Guild
+Tags: #antimicrobial #respiratory #annual #bloom-elite #pollinator-high
 ---
 
 # Nasturtium
@@ -61,3 +73,16 @@ Supports garden ecology through habitat, pollinator support, and companion diver
 - [[Companion Guilds Index]]
 - [[Color & Energetics Index]]
 - [[Month-by-Month Calendar (Zone 7B)]]
+
+## Seed Starting and Bloom Timing
+- Start method: Direct sow or start in larger cells to reduce transplant shock.
+- Days to germination: 7-10 days
+- Bloom from seed: 35-50 days
+- Bloom speed tier: Elite
+- Indoor bloom viability: Yes
+
+
+
+
+
+

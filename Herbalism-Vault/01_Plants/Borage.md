@@ -1,18 +1,30 @@
 ﻿---
 Type: Herb
+Category: Herb
 Family: Boraginaceae
 Life Cycle: Annual
 Height: 18-36 in
 Spread: 12-24 in
+Root Depth: Varies by species
 Sun: Full sun
 Soil: Well-drained, average
 Water: Moderate
 Zone: 2-11
+Start Method: Direct sow preferred; start in deep cells if transplanting.
 Start Month: March-April (direct sow)
+Days to Germination: 7-14 days
+Bloom Days: 45-60 days
+Bloom Speed Tier: Elite
 Harvest: Late spring through summer (leaf and flower)
 Primary Actions: Demulcent, Adrenal nutritive, Anti-inflammatory
 Energetics: Cooling, Moistening
-Tags: #digestive #wound #annual #cooling #moistening #pollinators
+Pollinator Value: High
+Nectar Level: High
+Pollen Level: Moderate
+Indoor Bloom Viable: Yes
+Feeding Level: Low-Moderate
+Companion Group: Herb Guild
+Tags: #digestive #wound #annual #cooling #moistening #pollinators #bloom-elite #pollinator-high
 ---
 
 # Borage
@@ -62,3 +74,16 @@ Supports garden ecology through habitat, pollinator support, and companion diver
 - [[Companion Guilds Index]]
 - [[Color & Energetics Index]]
 - [[Month-by-Month Calendar (Zone 7B)]]
+
+## Seed Starting and Bloom Timing
+- Start method: Direct sow preferred; start in deep cells if transplanting.
+- Days to germination: 7-14 days
+- Bloom from seed: 45-60 days
+- Bloom speed tier: Elite
+- Indoor bloom viability: Yes
+
+
+
+
+
+

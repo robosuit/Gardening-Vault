@@ -1,18 +1,30 @@
 ﻿---
 Type: Succulent
+Category: Herb
 Family: Asphodelaceae
 Life Cycle: Perennial
 Height: Varies by cultivar/site
 Spread: Varies by cultivar/site
+Root Depth: Varies by species
 Sun: Full sun to bright indirect
 Soil: Well-drained, organic matter as needed
 Water: Moderate unless noted
 Zone: 10-12 (container in 6-8)
+Start Method: Start indoors 6-8 weeks before target planting; direct sow species that dislike transplanting.
 Start Month: Spring (Zone 7B)
+Days to Germination: 10-30 days
+Bloom Days: 90-365+ days
+Bloom Speed Tier: Moderate
 Harvest: Seasonal by plant part
 Primary Actions: Vulnerary, Skin soothing
 Energetics: Context dependent
-Tags: #wound #cooling #container
+Pollinator Value: Moderate
+Nectar Level: Moderate
+Pollen Level: Moderate
+Indoor Bloom Viable: No
+Feeding Level: Low-Moderate
+Companion Group: Herb Guild
+Tags: #wound #cooling #container #bloom-moderate #pollinator-moderate
 ---
 
 # Aloe
@@ -60,3 +72,16 @@ Supports garden ecology through habitat, pollinator support, and companion diver
 - [[Companion Guilds Index]]
 - [[Color & Energetics Index]]
 - [[Month-by-Month Calendar (Zone 7B)]]
+
+## Seed Starting and Bloom Timing
+- Start method: Start indoors 6-8 weeks before target planting; direct sow species that dislike transplanting.
+- Days to germination: 10-30 days
+- Bloom from seed: 90-365+ days
+- Bloom speed tier: Moderate
+- Indoor bloom viability: No
+
+
+
+
+
+

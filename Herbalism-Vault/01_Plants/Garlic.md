@@ -1,18 +1,30 @@
 ﻿---
 Type: Bulb
+Category: Herb
 Family: Amaryllidaceae
 Life Cycle: Annual
 Height: Varies by cultivar/site
 Spread: Varies by cultivar/site
+Root Depth: Varies by species
 Sun: Full sun
 Soil: Well-drained, organic matter as needed
 Water: Moderate unless noted
 Zone: 3-8
+Start Method: Start indoors 6-8 weeks before target planting; direct sow species that dislike transplanting.
 Start Month: Spring (Zone 7B)
+Days to Germination: 7-21 days
+Bloom Days: 60-90 days
+Bloom Speed Tier: Fast
 Harvest: Seasonal by plant part
 Primary Actions: Antimicrobial, Immune, Circulatory
 Energetics: Context dependent
-Tags: #antimicrobial #immune #annual
+Pollinator Value: Moderate
+Nectar Level: Moderate
+Pollen Level: Moderate
+Indoor Bloom Viable: Limited
+Feeding Level: Low-Moderate
+Companion Group: Herb Guild
+Tags: #antimicrobial #immune #annual #bloom-fast #pollinator-moderate
 ---
 
 # Garlic
@@ -61,3 +73,16 @@ Supports garden ecology through habitat, pollinator support, and companion diver
 - [[Companion Guilds Index]]
 - [[Color & Energetics Index]]
 - [[Month-by-Month Calendar (Zone 7B)]]
+
+## Seed Starting and Bloom Timing
+- Start method: Start indoors 6-8 weeks before target planting; direct sow species that dislike transplanting.
+- Days to germination: 7-21 days
+- Bloom from seed: 60-90 days
+- Bloom speed tier: Fast
+- Indoor bloom viability: Limited
+
+
+
+
+
+

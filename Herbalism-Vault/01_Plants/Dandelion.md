@@ -1,18 +1,30 @@
 ﻿---
 Type: Herb
+Category: Herb
 Family: Asteraceae
 Life Cycle: Perennial
 Height: Varies by cultivar/site
 Spread: Varies by cultivar/site
+Root Depth: Varies by species
 Sun: Full-partial sun
 Soil: Well-drained, organic matter as needed
 Water: Moderate unless noted
 Zone: 3-10
+Start Method: Direct sow or indoor tray sowing for quick leaf and flower cycles.
 Start Month: Spring (Zone 7B)
+Days to Germination: 7-14 days
+Bloom Days: 55-75 days
+Bloom Speed Tier: Fast
 Harvest: Seasonal by plant part
 Primary Actions: Bitter tonic, Liver support
 Energetics: Context dependent
-Tags: #digestive #detox #perennial
+Pollinator Value: High
+Nectar Level: Moderate
+Pollen Level: High
+Indoor Bloom Viable: Limited
+Feeding Level: Low-Moderate
+Companion Group: Herb Guild
+Tags: #digestive #detox #perennial #bloom-fast #pollinator-high
 ---
 
 # Dandelion
@@ -60,3 +72,16 @@ Supports garden ecology through habitat, pollinator support, and companion diver
 - [[Companion Guilds Index]]
 - [[Color & Energetics Index]]
 - [[Month-by-Month Calendar (Zone 7B)]]
+
+## Seed Starting and Bloom Timing
+- Start method: Direct sow or indoor tray sowing for quick leaf and flower cycles.
+- Days to germination: 7-14 days
+- Bloom from seed: 55-75 days
+- Bloom speed tier: Fast
+- Indoor bloom viability: Limited
+
+
+
+
+
+

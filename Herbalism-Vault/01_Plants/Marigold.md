@@ -1,18 +1,30 @@
 ﻿---
 Type: Flower
+Category: Herb
 Family: Asteraceae
 Life Cycle: Annual
 Height: Varies by cultivar/site
 Spread: Varies by cultivar/site
+Root Depth: Varies by species
 Sun: Full sun
 Soil: Well-drained, organic matter as needed
 Water: Moderate unless noted
 Zone: 2-11
+Start Method: Start indoors 4-6 weeks before bloom target.
 Start Month: Spring (Zone 7B)
+Days to Germination: 5-10 days
+Bloom Days: 50-60 days
+Bloom Speed Tier: Fast
 Harvest: Seasonal by plant part
 Primary Actions: Mild anti-inflammatory, Topical support
 Energetics: Context dependent
-Tags: #wound #annual #yellow
+Pollinator Value: High
+Nectar Level: Moderate
+Pollen Level: Moderate
+Indoor Bloom Viable: Yes
+Feeding Level: Low-Moderate
+Companion Group: Herb Guild
+Tags: #wound #annual #yellow #bloom-fast #pollinator-high
 ---
 
 # Marigold
@@ -60,3 +72,16 @@ Supports garden ecology through habitat, pollinator support, and companion diver
 - [[Companion Guilds Index]]
 - [[Color & Energetics Index]]
 - [[Month-by-Month Calendar (Zone 7B)]]
+
+## Seed Starting and Bloom Timing
+- Start method: Start indoors 4-6 weeks before bloom target.
+- Days to germination: 5-10 days
+- Bloom from seed: 50-60 days
+- Bloom speed tier: Fast
+- Indoor bloom viability: Yes
+
+
+
+
+
+

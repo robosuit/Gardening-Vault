@@ -1,0 +1,22 @@
+# Build artifacts
+dist/
+build/
+*.log
+
+# Electron & old app
+electron-sandbox/
+electron-app/
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archive backups
+*.zip
+
+# IDE
+.obsidian/workspace.json

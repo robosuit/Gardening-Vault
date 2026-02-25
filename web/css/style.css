@@ -1,0 +1,10 @@
+*{box-sizing:border-box;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial}
+body{margin:0;padding:1rem;background:#f8f9fb;color:#0b1530}
+header{max-width:900px;margin:0 auto 1rem;padding:1rem}
+header h1{margin:.2rem 0}
+#q{width:100%;padding:.6rem;border:1px solid #d0d7df;border-radius:6px}
+main{max-width:900px;margin:0 auto}
+.item{background:#fff;padding:1rem;margin:.6rem 0;border-radius:8px;border:1px solid #e6e9ee}
+.item h2{margin:.2rem 0}
+.item .vault{color:#6b7280}
+.excerpt{margin-top:.5rem;color:#111}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gardening Vault</title>
+  <title>Gardening Repository</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -14,99 +14,56 @@
   <div class="ambient-shape shape-b" aria-hidden="true"></div>
 
   <main class="app-shell">
-    <section class="dashboard">
-      <aside class="panel menu-panel" aria-label="Vault Categories">
-        <div class="panel-head">
-          <h1>Gardening Vault</h1>
-          <p>Markdown powered crop and herbal knowledge base.</p>
+    <header class="panel top-panel">
+      <h1>Gardening Repository</h1>
+
+      <div class="top-groups">
+        <div class="seg-group" aria-label="Selection">
+          <button type="button" class="seg-btn active" data-quick="all">All</button>
+          <button type="button" class="seg-btn" data-quick="plants">Plants</button>
+          <button type="button" class="seg-btn" data-quick="indexes">Indexes</button>
+          <button type="button" class="seg-btn" data-quick="guides">Guides</button>
+          <button type="button" class="seg-btn" id="openHelpBtn">Help</button>
         </div>
-        <nav class="menu-list" id="vaultNav"></nav>
-        <button type="button" class="menu-help" id="openHelpBtn">How To Use This Site</button>
-      </aside>
 
-      <aside class="panel tool-rail" aria-label="Quick Filters and Views">
-        <button type="button" class="rail-btn active" data-quick="all" title="All documents">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"></path><path d="M8 9h8"></path><path d="M8 13h8"></path></svg>
-          </span>
-          <span class="rail-label">All</span>
-        </button>
-        <button type="button" class="rail-btn" data-quick="plants" title="Plant notes">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 20V9"></path><path d="M12 10c0-4-3-6-7-6 0 4 2 7 6 7"></path><path d="M12 10c0-4 3-6 7-6 0 4-2 7-6 7"></path></svg>
-          </span>
-          <span class="rail-label">Plants</span>
-        </button>
-        <button type="button" class="rail-btn" data-quick="indexes" title="Indexes and references">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M6 4h12v16H6z"></path><path d="M9 8h6"></path><path d="M9 12h6"></path><path d="M9 16h4"></path></svg>
-          </span>
-          <span class="rail-label">Indexes</span>
-        </button>
-        <button type="button" class="rail-btn" data-quick="guides" title="Guides and planning docs">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M5 5h7v14H5z"></path><path d="M12 5h7v14h-7"></path><path d="M12 8h4"></path><path d="M12 12h4"></path></svg>
-          </span>
-          <span class="rail-label">Guides</span>
-        </button>
+        <div class="seg-group" aria-label="View">
+          <button type="button" class="seg-btn active" data-view="cards">Cards</button>
+          <button type="button" class="seg-btn" data-view="list">List</button>
+        </div>
 
-        <div class="rail-divider" aria-hidden="true"></div>
+        <div class="seg-group" aria-label="Life Cycle">
+          <button type="button" class="seg-btn active" data-life="all">All Cycles</button>
+          <button type="button" class="seg-btn" data-life="annual">Annuals</button>
+          <button type="button" class="seg-btn" data-life="perennial">Perennials</button>
+        </div>
+      </div>
 
-        <button type="button" class="rail-btn active" data-view="cards" title="Card view">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 4h7v7H4z"></path><path d="M13 4h7v7h-7z"></path><path d="M4 13h7v7H4z"></path><path d="M13 13h7v7h-7z"></path></svg>
-          </span>
-          <span class="rail-label">Cards</span>
-        </button>
-        <button type="button" class="rail-btn" data-view="list" title="List view">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M8 7h12"></path><path d="M8 12h12"></path><path d="M8 17h12"></path><path d="M4 7h.01"></path><path d="M4 12h.01"></path><path d="M4 17h.01"></path></svg>
-          </span>
-          <span class="rail-label">List</span>
-        </button>
-        <button type="button" class="rail-btn" id="helpRailBtn" title="Open help">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 0 1 6 0c0 2-3 2-3 5"></path><path d="M12 17h.01"></path><circle cx="12" cy="12" r="10"></circle></svg>
-          </span>
-          <span class="rail-label">Help</span>
-        </button>
-      </aside>
-
-      <section class="command-column" aria-label="Sorting and actions">
-        <div class="panel select-panel">
-          <label for="sortSelect">Document</label>
-          <div class="select-wrap">
-            <select id="sortSelect">
-              <option value="title-asc">Sort by Name (A-Z)</option>
-              <option value="title-desc">Sort by Name (Z-A)</option>
-              <option value="vault-asc">Sort by Vault</option>
-              <option value="type-asc">Sort by Type</option>
-              <option value="section-asc">Sort by Section</option>
-            </select>
-          </div>
-          <input type="search" id="searchInput" placeholder="Search notes, tags, metadata..." autocomplete="off">
-          <select id="typeSelect" aria-label="Filter by note type">
-            <option value="all">All Types</option>
+      <div class="control-row">
+        <input type="search" id="searchInput" placeholder="Search plant name, tag, or note content..." autocomplete="off">
+        <div class="select-wrap">
+          <select id="sortSelect" aria-label="Sort results">
+            <option value="relevance">Sort by Relevance</option>
+            <option value="title-asc">Sort by Name (A-Z)</option>
+            <option value="title-desc">Sort by Name (Z-A)</option>
+            <option value="category-asc">Sort by Category</option>
           </select>
         </div>
-
-        <div class="panel action-panel">
-          <h2>Actions</h2>
-          <button type="button" class="action-btn" id="openSelectedBtn">Open Selected</button>
-          <button type="button" class="action-btn" id="copyPathBtn">Copy Note Path</button>
-          <button type="button" class="action-btn" id="sourceBtn">View on GitHub</button>
-          <button type="button" class="action-btn" id="downloadBtn">Download Filtered Data</button>
-          <button type="button" class="action-btn" id="resetBtn">Reset Filters</button>
-          <p class="status" id="statusBox">Loading data...</p>
-        </div>
-      </section>
-    </section>
-
-    <section class="panel results-panel">
-      <div class="results-head">
-        <p id="resultsSummary">Loading notes...</p>
+        <button type="button" id="resetBtn" class="reset-btn">Reset Filters</button>
       </div>
-      <div id="results" class="results-grid" role="list"></div>
+    </header>
+
+    <section class="workspace">
+      <aside class="panel vault-panel" aria-label="Vault categories">
+        <h2>Vaults</h2>
+        <nav id="vaultNav" class="vault-list"></nav>
+      </aside>
+
+      <section class="panel results-panel">
+        <div class="results-head">
+          <p id="resultsSummary">Loading notes...</p>
+        </div>
+        <div id="results" class="results-grid" role="list"></div>
+      </section>
     </section>
   </main>
 
@@ -125,11 +82,11 @@
       <button type="button" id="closeHelpDialog">Close</button>
     </div>
     <ol>
-      <li>Pick a vault on the left to narrow data to herbs, vegetables, fruits, wildflowers, or indexes.</li>
-      <li>Use the center rail for quick modes (`Plants`, `Indexes`, `Guides`) and to switch `Cards` or `List` view.</li>
-      <li>Use search, type filter, and sort controls to organize results exactly how you need.</li>
-      <li>Click any result once to select it, then use actions on the right or double-click to open full note content.</li>
-      <li>Run <code>npm run build-data</code> after markdown edits so GitHub Pages always reflects current vault data.</li>
+      <li>Use top filters: All, Plants, Indexes, Guides, Help.</li>
+      <li>Switch Cards or List view from the top bar.</li>
+      <li>Use All Cycles, Annuals, or Perennials to narrow results.</li>
+      <li>Use vault categories: Herbs, Vegetables, Fruits, Berries, Wildflowers.</li>
+      <li>Click any result once to open it directly.</li>
     </ol>
   </dialog>
 

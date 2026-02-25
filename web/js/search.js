@@ -66,8 +66,18 @@ function esc(text) {
 function getBasePath() {
   const { hostname, pathname } = window.location;
   if (!hostname.endsWith('github.io')) return '';
-  const firstSegment = pathname.split('/').filter(Boolean)[0] || '';
-  return firstSegment ? `/${firstSegment}` : '';
+
+  const segments = pathname.split('/').filter(Boolean);
+  if (!segments.length) return '';
+
+  // Support both deployment layouts:
+  // 1) /Gardening-Vault/ (GitHub Actions artifact publishes web as site root)
+  // 2) /Gardening-Vault/web/ (Pages "deploy from branch" on repository root)
+  if (segments.length >= 2 && segments[1] === 'web') {
+    return `/${segments[0]}/web`;
+  }
+
+  return `/${segments[0]}`;
 }
 
 function getLifeCycle(item) {

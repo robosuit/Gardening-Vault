@@ -1,20 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Gardening Vault</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gardening Vault - Your Gardener's Operating System</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <h1>Gardening Vault</h1>
-    <p class="lead">Search and browse your Obsidian vault content.</p>
-    <input id="q" placeholder="Search title, tags, content...">
-  </header>
-  <main>
-    <div id="results"></div>
-  </main>
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <h1>🌱 Gardening Vault</h1>
+        <p class="tagline">Your Gardener's Operating System</p>
+      </div>
+      
+      <div class="search-box">
+        <input id="q" type="text" placeholder="Search plants, herbs, vegetables..." autocomplete="off">
+      </div>
+      
+      <div class="vault-filters">
+        <button class="filter-btn active" data-filter="all">All Plants</button>
+        <button class="filter-btn" data-filter="Herbalism-Vault">🌿 Herbs</button>
+        <button class="filter-btn" data-filter="Vegetable-Vault">🥬 Vegetables</button>
+        <button class="filter-btn" data-filter="Fruit-Berry-Vault">🍓 Fruits & Berries</button>
+        <button class="filter-btn" data-filter="Wildflower-Vault">🌼 Wildflowers</button>
+      </div>
+    </header>
+
+    <main id="results" class="results-grid">
+      <div class="loading">Loading plant database...</div>
+    </main>
+    
+    <footer>
+      <p>Gardening Vault • Plants: <span id="total-count">0</span></p>
+    </footer>
+  </div>
+
   <script src="js/search.js"></script>
 </body>
 </html>

@@ -3,39 +3,456 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gardening Vault - Your Gardener's Operating System</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Gardening Vault - Operating System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .app-container {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: white;
+      padding: 2rem 0;
+      overflow-y: auto;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-header {
+      padding: 0 1.5rem 2rem;
+      border-bottom: 1px solid #f0f0f0;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-header h1 {
+      font-size: 1.3rem;
+      color: #667eea;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-item {
+      padding: 1rem 1.5rem;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-left: 4px solid transparent;
+      font-weight: 500;
+    }
+
+    .nav-item:hover {
+      background: #f5f5f5;
+      color: #667eea;
+    }
+
+    .nav-item.active {
+      background: #667eea;
+      color: white;
+      border-left-color: #764ba2;
+    }
+
+    /* Main content area */
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f8f9fa;
+      overflow: hidden;
+    }
+
+    .header-bar {
+      background: white;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .header-controls {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .sort-dropdown, .view-toggle {
+      padding: 0.8rem 1.2rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      font-weight: 500;
+      color: #667eea;
+      transition: all 0.2s ease;
+    }
+
+    .sort-dropdown:hover, .view-toggle:hover {
+      border-color: #667eea;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+    }
+
+    /* Content area with grid */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem;
+    }
+
+    .plants-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .plant-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border-top: 4px solid #667eea;
+    }
+
+    .plant-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .plant-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+    }
+
+    .plant-vault {
+      display: inline-block;
+      background: #f0f0f0;
+      color: #667eea;
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .plant-excerpt {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .plant-meta {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: #999;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #999;
+    }
+
+    .empty-state h3 {
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #888;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 1rem 0;
+      }
+
+      .app-container {
+        flex-direction: column;
+      }
+
+      .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .nav-item {
+        flex: 1;
+        min-width: 120px;
+        border-bottom: 4px solid transparent;
+        border-left: none;
+        text-align: center;
+      }
+
+      .nav-item.active {
+        border-bottom-color: #764ba2;
+      }
+
+      .plants-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="header-content">
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
         <h1>🌱 Gardening Vault</h1>
-        <p class="tagline">Your Gardener's Operating System</p>
       </div>
-      
-      <div class="search-box">
-        <input id="q" type="text" placeholder="Search plants, herbs, vegetables..." autocomplete="off">
-      </div>
-      
-      <div class="vault-filters">
-        <button class="filter-btn active" data-filter="all">All Plants</button>
-        <button class="filter-btn" data-filter="Herbalism-Vault">🌿 Herbs</button>
-        <button class="filter-btn" data-filter="Vegetable-Vault">🥬 Vegetables</button>
-        <button class="filter-btn" data-filter="Fruit-Berry-Vault">🍓 Fruits & Berries</button>
-        <button class="filter-btn" data-filter="Wildflower-Vault">🌼 Wildflowers</button>
-      </div>
-    </header>
+      <nav class="sidebar-nav" id="sidebarNav">
+        <div class="nav-item active" data-filter="all">All Plants (0)</div>
+        <div class="nav-item" data-filter="Herbalism-Vault">🌿 Herbs</div>
+        <div class="nav-item" data-filter="Vegetable-Vault">🥬 Vegetables</div>
+        <div class="nav-item" data-filter="Fruit-Berry-Vault">🫐 Fruits & Berries</div>
+        <div class="nav-item" data-filter="Wildflower-Vault">🌼 Wildflowers</div>
+      </nav>
+    </aside>
 
-    <main id="results" class="results-grid">
-      <div class="loading">Loading plant database...</div>
-    </main>
-    
-    <footer>
-      <p>Gardening Vault • Plants: <span id="total-count">0</span></p>
-    </footer>
+    <!-- Main Content -->
+    <div class="main-container">
+      <!-- Header with Search -->
+      <div class="header-bar">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search plants, herbs, vegetables...">
+        </div>
+        <div class="header-controls">
+          <select class="sort-dropdown" id="sortDropdown">
+            <option value="name">Sort by Name</option>
+            <option value="vault">Sort by Vault</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Plants Grid -->
+      <div class="content">
+        <div class="plants-grid" id="plantsGrid">
+          <div class="empty-state">
+            <h3>Loading plants...</h3>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <script src="js/search.js"></script>
+  <script>
+    let DATA = [];
+    let currentFilter = 'all';
+
+    // Utility functions
+    function getBasePath() {
+      const path = window.location.pathname;
+      if (path.includes('/Gardening-Vault')) {
+        return '/Gardening-Vault';
+      }
+      return '';
+    }
+
+    function getVaultEmoji(vault) {
+      const emojis = {
+        'Herbalism-Vault': '🌿',
+        'Vegetable-Vault': '🥬',
+        'Fruit-Berry-Vault': '🫐',
+        'Wildflower-Vault': '🌼',
+        'Master-Indexes': '📋',
+      };
+      return emojis[vault] || '🌱';
+    }
+
+    function getVaultLabel(vault) {
+      return vault.replace('-Vault', '').replace(/-/g, ' ');
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function getExcerpt(html) {
+      if (!html) return '';
+      const match = html.match(/<p>(.*?)<\/p>/);
+      if (match) {
+        const text = match[1].replace(/<[^>]*>/g, '');
+        return text.slice(0, 150);
+      }
+      const text = html.replace(/<[^>]*>/g, '');
+      return text.slice(0, 150);
+    }
+
+    // Load data
+    async function loadData() {
+      try {
+        const basePath = getBasePath();
+        const response = await fetch(basePath + '/data/plants.json');
+        if (!response.ok) throw new Error('Failed to load data');
+        DATA = await response.json();
+        updateUI();
+      } catch (error) {
+        console.error('Data load error:', error);
+        document.getElementById('plantsGrid').innerHTML = `
+          <div class="empty-state">
+            <h3>Error loading plants</h3>
+            <p>${error.message}</p>
+          </div>
+        `;
+      }
+    }
+
+    function filterData(filter, searchTerm = '') {
+      let filtered = filter === 'all' ? DATA : DATA.filter(item => item.vault === filter);
+      
+      if (searchTerm) {
+        const term = searchTerm.toLowerCase();
+        filtered = filtered.filter(item => {
+          return (item.title && item.title.toLowerCase().includes(term)) ||
+                  (item.raw && item.raw.toLowerCase().includes(term));
+        });
+      }
+      
+      return filtered;
+    }
+
+    function sortData(data, sortBy) {
+      const sorted = [...data];
+      if (sortBy === 'name') {
+        sorted.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+      } else if (sortBy === 'vault') {
+        sorted.sort((a, b) => a.vault.localeCompare(b.vault));
+      }
+      return sorted;
+    }
+
+    function renderPlants(plants) {
+      const grid = document.getElementById('plantsGrid');
+      
+      if (!plants || plants.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <h3>No plants found</h3>
+            <p>Try adjusting your search or filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = plants.map(plant => `
+        <div class="plant-card">
+          <span class="plant-vault">${getVaultEmoji(plant.vault)} ${getVaultLabel(plant.vault)}</span>
+          <h3>${escapeHtml(plant.title)}</h3>
+          <p class="plant-excerpt">${getExcerpt(plant.html)}</p>
+        </div>
+      `).join('');
+    }
+
+    function updateUI() {
+      const searchTerm = document.getElementById('searchInput').value;
+      const sortBy = document.getElementById('sortDropdown').value;
+      
+      let plants = filterData(currentFilter, searchTerm);
+      plants = sortData(plants, sortBy);
+      
+      renderPlants(plants);
+      updateCounts();
+    }
+
+    function updateCounts() {
+      document.querySelectorAll('.nav-item').forEach(item => {
+        const filter = item.dataset.filter;
+        if (filter === 'all') {
+          item.textContent = `All Plants (${DATA.length})`;
+        } else {
+          const count = DATA.filter(p => p.vault === filter).length;
+          const label = item.textContent.split('(')[0].trim();
+          item.textContent = label + ` (${count})`;
+        }
+      });
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load data
+      loadData();
+
+      // Sidebar navigation
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+          document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+          item.classList.add('active');
+          currentFilter = item.dataset.filter;
+          updateUI();
+        });
+      });
+
+      // Search
+      document.getElementById('searchInput').addEventListener('input', updateUI);
+
+      // Sort
+      document.getElementById('sortDropdown').addEventListener('change', updateUI);
+    });
+  </script>
 </body>
 </html>

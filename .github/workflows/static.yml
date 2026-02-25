@@ -26,7 +26,6 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -48,7 +47,7 @@ jobs:
       - name: Build status
         if: steps.install.outcome != 'success'
         run: echo "Dependency install failed; deploying committed ./web content to keep Pages online."
-      - name: Ensure Pages uses workflow deploy
+      - name: Ensure Pages uses gh-pages branch
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
@@ -62,7 +61,7 @@ jobs:
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "${API_URL}" \
-            -d '{"build_type":"workflow"}')
+            -d '{"build_type":"legacy","source":{"branch":"gh-pages","path":"/"}}')
 
           echo "Pages update response code: ${UPDATE_CODE}"
           cat /tmp/pages_update.json
@@ -74,19 +73,10 @@ jobs:
               -H "Authorization: Bearer ${GH_TOKEN}" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               "${API_URL}" \
-              -d '{"build_type":"workflow","source":{"branch":"main","path":"/"}}')
+              -d '{"build_type":"legacy","source":{"branch":"gh-pages","path":"/"}}')
             echo "Pages create response code: ${CREATE_CODE}"
             cat /tmp/pages_create.json
           fi
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload only the web directory
-          path: './web'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        continue-on-error: true
-        uses: actions/deploy-pages@v4
       - name: Fallback deploy to gh-pages branch
         if: always()
         uses: peaceiris/actions-gh-pages@v3

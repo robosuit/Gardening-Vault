@@ -1,9 +1,26 @@
+const MONTHS = [
+  'january',
+  'february',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'october',
+  'november',
+  'december'
+];
+
 const state = {
   data: [],
   filtered: [],
   quick: 'all',
   view: 'cards',
   life: 'all',
+  temperature: 'all',
+  month: 'all',
   query: '',
   sort: 'relevance',
   vaultCategory: 'all'
@@ -21,6 +38,7 @@ const CATEGORY_ORDER = ['all', 'Herbs', 'Vegetables', 'Fruits', 'Berries', 'Wild
 const els = {
   vaultNav: document.getElementById('vaultNav'),
   searchInput: document.getElementById('searchInput'),
+  monthSelect: document.getElementById('monthSelect'),
   sortSelect: document.getElementById('sortSelect'),
   resetBtn: document.getElementById('resetBtn'),
   results: document.getElementById('results'),
@@ -62,6 +80,32 @@ function getLifeCycle(item) {
   ).toLowerCase();
 }
 
+function getTagSet(item) {
+  const tags = Array.isArray(item.tags) ? item.tags : [];
+  return new Set(tags.map((tag) => String(tag).toLowerCase()));
+}
+
+function getTemperatures(item) {
+  if (Array.isArray(item.temperatures) && item.temperatures.length) {
+    return item.temperatures.map((value) => String(value).toLowerCase());
+  }
+
+  const tags = getTagSet(item);
+  const values = [];
+  if (tags.has('cool')) values.push('cool');
+  if (tags.has('warm')) values.push('warm');
+  return values;
+}
+
+function getMonths(item) {
+  if (Array.isArray(item.months) && item.months.length) {
+    return item.months.map((value) => String(value).toLowerCase());
+  }
+
+  const tags = getTagSet(item);
+  return MONTHS.filter((month) => tags.has(month));
+}
+
 function isBerry(item) {
   const text = [
     item.title,
@@ -82,6 +126,8 @@ function categoryOf(item) {
 }
 
 function isIndex(item) {
+  if (String(item.category || '').toLowerCase() === 'index') return true;
+
   const type = String(item.type || '').toLowerCase();
   const section = String(item.section || '').toLowerCase();
   const vault = String(item.vault || '').toLowerCase();
@@ -89,9 +135,13 @@ function isIndex(item) {
 }
 
 function isGuide(item) {
+  const category = String(item.category || '').toLowerCase();
+  if (category === 'guide' || category === 'design') return true;
+
   const type = String(item.type || '').toLowerCase();
   const section = String(item.section || '').toLowerCase();
   const vault = String(item.vault || '').toLowerCase();
+
   return type.includes('guide') ||
     section.includes('guide') ||
     section.includes('preparation') ||
@@ -101,8 +151,11 @@ function isGuide(item) {
 }
 
 function isPlantLike(item) {
+  if (String(item.category || '').toLowerCase() === 'plant') return true;
+
   const type = String(item.type || '').toLowerCase();
   const section = String(item.section || '').toLowerCase();
+
   return ['herb', 'vegetable', 'fruit', 'flower', 'wildflower'].some((token) => type.includes(token)) ||
     section.includes('plants') ||
     section.includes('crops');
@@ -127,6 +180,16 @@ function matchesLife(item) {
   return true;
 }
 
+function matchesTemperature(item) {
+  if (state.temperature === 'all') return true;
+  return getTemperatures(item).includes(state.temperature);
+}
+
+function matchesMonth(item) {
+  if (state.month === 'all') return true;
+  return getMonths(item).includes(state.month);
+}
+
 function matchesVaultCategory(item) {
   if (state.vaultCategory === 'all') return true;
   if (state.quick === 'indexes' || state.quick === 'guides') return true;
@@ -139,6 +202,7 @@ function scoreItem(item, query) {
   const q = query.toLowerCase();
   const title = String(item.title || '').toLowerCase();
   const category = categoryOf(item).toLowerCase();
+  const itemCategory = String(item.category || '').toLowerCase();
   const type = String(item.type || '').toLowerCase();
   const excerpt = String(item.excerpt || '').toLowerCase();
   const path = String(item.path || '').toLowerCase();
@@ -150,7 +214,8 @@ function scoreItem(item, query) {
   if (title.startsWith(q)) score += 420;
   if (title.includes(q)) score += 250;
   if (tags.includes(q)) score += 150;
-  if (category.includes(q)) score += 125;
+  if (category.includes(q)) score += 120;
+  if (itemCategory.includes(q)) score += 120;
   if (type.includes(q)) score += 80;
   if (excerpt.includes(q)) score += 60;
   if (path.includes(q)) score += 40;
@@ -186,12 +251,11 @@ function sortResults(items) {
 }
 
 function baseScope() {
-  return state.data.filter((item) => matchesQuick(item) && matchesLife(item));
+  return state.data.filter((item) => matchesQuick(item) && matchesLife(item) && matchesTemperature(item) && matchesMonth(item));
 }
 
 function applyFilters() {
   const query = state.query.trim().toLowerCase();
-
   let items = baseScope().filter((item) => matchesVaultCategory(item));
 
   if (query) {
@@ -247,12 +311,14 @@ function renderResults() {
   }
 
   els.results.innerHTML = state.filtered.map((item) => {
+    const typeChip = String(item.category || item.type || 'Note');
+
     return `
       <button type="button" class="result-card" data-id="${esc(item.id)}" role="listitem">
         <div class="result-title">${esc(item.title)}</div>
         <div class="result-meta">
           <span class="chip">${esc(categoryOf(item))}</span>
-          <span class="chip">${esc(item.type || 'Note')}</span>
+          <span class="chip">${esc(typeChip)}</span>
         </div>
         <div class="result-excerpt">${esc(item.excerpt || '')}</div>
         <div class="result-path">${esc(item.path)}</div>
@@ -263,8 +329,11 @@ function renderResults() {
 
 function updateSummary() {
   const lifeText = state.life === 'all' ? 'all cycles' : state.life;
+  const tempText = state.temperature === 'all' ? 'all temps' : state.temperature;
+  const monthText = state.month === 'all' ? 'all months' : state.month;
   const quickText = state.quick;
-  els.resultsSummary.textContent = `Showing ${state.filtered.length} results (${quickText}, ${lifeText}). Click any result to open.`;
+
+  els.resultsSummary.textContent = `Showing ${state.filtered.length} results (${quickText}, ${lifeText}, ${tempText}, ${monthText}). Click any result to open.`;
 }
 
 function applyAndRender() {
@@ -277,10 +346,10 @@ function applyAndRender() {
 function markdownMetaChips(item) {
   const chips = [
     categoryOf(item),
-    item.type || null,
+    item.category || item.type || null,
     getLifeCycle(item) ? `Life Cycle: ${getLifeCycle(item)}` : null,
-    item.startMonth ? `Start: ${item.startMonth}` : null,
-    item.harvest ? `Harvest: ${item.harvest}` : null
+    getTemperatures(item).length ? `Temp: ${getTemperatures(item).join('/')}` : null,
+    getMonths(item).length ? `Months: ${getMonths(item).join(', ')}` : null
   ].filter(Boolean);
 
   return chips.map((value) => `<span class="chip">${esc(value)}</span>`).join('');
@@ -320,19 +389,38 @@ function setLife(life) {
   });
 }
 
+function setTemperature(temperature) {
+  state.temperature = temperature;
+  document.querySelectorAll('[data-temp]').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.temp === temperature);
+  });
+}
+
+function attachOutsideDismiss(dialog) {
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+}
+
 function resetFilters() {
   state.query = '';
   state.quick = 'all';
   state.view = 'cards';
   state.life = 'all';
+  state.temperature = 'all';
+  state.month = 'all';
   state.sort = 'relevance';
   state.vaultCategory = 'all';
 
   els.searchInput.value = '';
+  els.monthSelect.value = 'all';
   els.sortSelect.value = 'relevance';
   setQuick('all');
   setView('cards');
   setLife('all');
+  setTemperature('all');
   applyAndRender();
 }
 
@@ -370,6 +458,11 @@ function wireEvents() {
     applyAndRender();
   });
 
+  els.monthSelect.addEventListener('change', (event) => {
+    state.month = event.target.value;
+    applyAndRender();
+  });
+
   els.sortSelect.addEventListener('change', (event) => {
     state.sort = event.target.value;
     applyAndRender();
@@ -396,6 +489,13 @@ function wireEvents() {
     });
   });
 
+  document.querySelectorAll('[data-temp]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      setTemperature(btn.dataset.temp);
+      applyAndRender();
+    });
+  });
+
   els.results.addEventListener('click', (event) => {
     const card = event.target.closest('.result-card');
     if (!card) return;
@@ -408,6 +508,9 @@ function wireEvents() {
   els.openHelpBtn.addEventListener('click', () => els.helpDialog.showModal());
   els.closeNoteDialog.addEventListener('click', () => els.noteDialog.close());
   els.closeHelpDialog.addEventListener('click', () => els.helpDialog.close());
+
+  attachOutsideDismiss(els.noteDialog);
+  attachOutsideDismiss(els.helpDialog);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

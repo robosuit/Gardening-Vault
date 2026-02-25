@@ -19,6 +19,36 @@ const vaultConfig = [
   { dir: 'Templates', label: 'Templates', type: 'Template' }
 ];
 
+const MONTHS = [
+  'january',
+  'february',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'october',
+  'november',
+  'december'
+];
+
+const MONTH_TEMPERATURES = {
+  january: ['cool'],
+  february: ['cool'],
+  march: ['cool'],
+  april: ['warm'],
+  may: ['warm'],
+  june: ['warm'],
+  july: ['warm'],
+  august: ['warm'],
+  september: ['warm'],
+  october: ['warm', 'cool'],
+  november: ['cool'],
+  december: ['cool']
+};
+
 function normalizeRelative(filePath) {
   return filePath.split(path.sep).join('/');
 }
@@ -74,6 +104,23 @@ function parseTags(rawTags) {
     .filter(Boolean);
 }
 
+function uniqueLower(values) {
+  return [...new Set(values.map((value) => String(value || '').trim().toLowerCase()).filter(Boolean))];
+}
+
+function safeDecode(input) {
+  try {
+    return decodeURIComponent(input);
+  } catch {
+    return input;
+  }
+}
+
+function extractMonths(text) {
+  const lower = String(text || '').toLowerCase();
+  return MONTHS.filter((month) => new RegExp(`\\b${month}\\b`).test(lower));
+}
+
 function inferType(frontmatter, vaultDir, section) {
   const fmType = frontmatter.Type || frontmatter.type || frontmatter.Category || frontmatter.category;
   if (fmType) return String(fmType);
@@ -84,6 +131,123 @@ function inferType(frontmatter, vaultDir, section) {
 
   const config = vaultConfig.find((entry) => entry.dir === vaultDir);
   return config ? config.type : 'Note';
+}
+
+function classifyNote({ rel, vault, section, title, frontmatter, baseTags }) {
+  const pathLc = safeDecode(rel.toLowerCase());
+  const titleLc = title.toLowerCase();
+  const sectionLc = section.toLowerCase();
+  const addTags = [...baseTags];
+  const months = [];
+  const temperatures = [];
+
+  let type = inferType(frontmatter, vault, section);
+  let category = 'Plant';
+
+  const addTag = (...values) => {
+    values.forEach((value) => {
+      if (value) addTags.push(value);
+    });
+  };
+
+  const addTemperature = (...values) => {
+    values.forEach((value) => {
+      if (value) temperatures.push(value);
+    });
+  };
+
+  if (pathLc.includes('/00_indexes/') || vault === 'Master-Indexes') {
+    type = 'Index';
+    category = 'Index';
+    addTag('index', 'reference');
+  }
+
+  if (vault === 'Templates' || pathLc.includes('/templates/')) {
+    type = 'Template';
+    category = 'Template';
+    addTag('template');
+  }
+
+  if (vault === 'Quick Start Guides') {
+    type = 'Guide';
+    category = 'Guide';
+    addTag('guide');
+  }
+
+  if (pathLc.includes('/02_apothecary/') || pathLc.includes('/03_preparations/')) {
+    type = 'Guide';
+    category = 'Guide';
+    addTag('guide', 'herbal-medicine');
+  }
+
+  if (pathLc.includes('/04_garden_design/')) {
+    type = 'Design';
+    category = 'Design';
+    addTag('design', 'structure', 'architecture', 'layout');
+  }
+
+  if (pathLc.includes('/05_months/')) {
+    type = 'Guide';
+    category = 'Guide';
+    addTag('month', 'guide', 'planting');
+
+    const monthHits = extractMonths(`${titleLc} ${pathLc}`);
+    monthHits.forEach((month) => {
+      months.push(month);
+      addTag(month);
+      addTemperature(...(MONTH_TEMPERATURES[month] || []));
+      addTag(...(MONTH_TEMPERATURES[month] || []));
+    });
+  }
+
+  if (pathLc.includes('/02_planting/')) {
+    type = 'Guide';
+    category = 'Guide';
+    addTag('guide', 'planting');
+
+    if (titleLc.includes('warm') || pathLc.includes('warm')) {
+      addTemperature('warm');
+      addTag('warm');
+    }
+    if (titleLc.includes('cool') || pathLc.includes('cool')) {
+      addTemperature('cool');
+      addTag('cool');
+    }
+  }
+
+  if (/(design|structure|architecture|layout)/.test(`${titleLc} ${sectionLc} ${pathLc}`)) {
+    addTag('design', 'structure', 'architecture');
+  }
+  if (/(map)/.test(`${titleLc} ${pathLc}`)) addTag('map');
+  if (/(matrix)/.test(`${titleLc} ${pathLc}`)) addTag('matrix');
+  if (/(network)/.test(`${titleLc} ${pathLc}`)) addTag('network');
+
+  if (titleLc.includes('tincture')) addTag('tincture');
+  if (titleLc.includes('salve')) addTag('salve');
+  if (titleLc.includes('ointment')) addTag('ointment');
+  if (titleLc.includes('syrup')) addTag('syrup');
+  if (titleLc.includes('infusion') || titleLc.includes('tea')) addTag('tea');
+
+  const frontmatterMonthText = `${frontmatter['Start Month'] || ''} ${frontmatter.Harvest || ''}`;
+  extractMonths(frontmatterMonthText).forEach((month) => {
+    months.push(month);
+    addTag(month);
+  });
+
+  const tags = uniqueLower(addTags).filter((tag) => {
+    if (category === 'Guide' && (pathLc.includes('/02_apothecary/') || pathLc.includes('/03_preparations/'))) {
+      return tag !== 'herb' && tag !== 'herbs';
+    }
+    return true;
+  });
+
+  return {
+    type,
+    category,
+    tags,
+    months: uniqueLower(months),
+    temperatures: uniqueLower(temperatures)
+  };
 }
 
 function collectMarkdownFiles() {
@@ -116,8 +280,15 @@ function build() {
 
     const title = String(frontmatter.title || heading || fallbackTitle).trim();
     const section = sectionFromPath(rel);
-    const type = inferType(frontmatter, vault, section);
-    const tags = parseTags(frontmatter.Tags || frontmatter.tags);
+    const initialTags = parseTags(frontmatter.Tags || frontmatter.tags);
+    const classification = classifyNote({
+      rel,
+      vault,
+      section,
+      title,
+      frontmatter,
+      baseTags: initialTags
+    });
     const html = md.render(content);
 
     const vaultMeta = vaultConfig.find((entry) => entry.dir === vault);
@@ -128,11 +299,14 @@ function build() {
       vault,
       vaultLabel: vaultMeta ? vaultMeta.label : vault,
       section,
-      type,
+      type: classification.type,
+      category: classification.category,
       path: rel,
       title,
       excerpt: excerptFromContent(content),
-      tags,
+      tags: classification.tags,
+      months: classification.months,
+      temperatures: classification.temperatures,
       zone: frontmatter.Zone || frontmatter.zone || null,
       sun: frontmatter.Sun || frontmatter.sun || null,
       water: frontmatter.Water || frontmatter.water || null,

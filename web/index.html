@@ -36,10 +36,33 @@
           <button type="button" class="seg-btn" data-life="annual">Annuals</button>
           <button type="button" class="seg-btn" data-life="perennial">Perennials</button>
         </div>
+
+        <div class="seg-group" aria-label="Temperature">
+          <button type="button" class="seg-btn active" data-temp="all">All Temps</button>
+          <button type="button" class="seg-btn" data-temp="cool">Cool</button>
+          <button type="button" class="seg-btn" data-temp="warm">Warm</button>
+        </div>
       </div>
 
       <div class="control-row">
         <input type="search" id="searchInput" placeholder="Search plant name, tag, or note content..." autocomplete="off">
+        <div class="select-wrap">
+          <select id="monthSelect" aria-label="Filter by month">
+            <option value="all">All Months</option>
+            <option value="january">January</option>
+            <option value="february">February</option>
+            <option value="march">March</option>
+            <option value="april">April</option>
+            <option value="may">May</option>
+            <option value="june">June</option>
+            <option value="july">July</option>
+            <option value="august">August</option>
+            <option value="september">September</option>
+            <option value="october">October</option>
+            <option value="november">November</option>
+            <option value="december">December</option>
+          </select>
+        </div>
         <div class="select-wrap">
           <select id="sortSelect" aria-label="Sort results">
             <option value="relevance">Sort by Relevance</option>
@@ -84,7 +107,8 @@
     <ol>
       <li>Use top filters: All, Plants, Indexes, Guides, Help.</li>
       <li>Switch Cards or List view from the top bar.</li>
-      <li>Use All Cycles, Annuals, or Perennials to narrow results.</li>
+      <li>Use All Cycles + Temperature tabs (Cool/Warm) to narrow results.</li>
+      <li>Use the month dropdown for monthly and seasonal planning content.</li>
       <li>Use vault categories: Herbs, Vegetables, Fruits, Berries, Wildflowers.</li>
       <li>Click any result once to open it directly.</li>
     </ol>

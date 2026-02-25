@@ -1,30 +1,39 @@
 const state = {
   data: [],
   filtered: [],
-  vaultCategory: 'all',
+  selectedId: null,
+  vault: 'all',
   quick: 'all',
-  life: 'all',
   view: 'cards',
   query: '',
-  sort: 'relevance'
+  type: 'all',
+  sort: 'title-asc'
 };
 
-const PLANT_VAULTS = new Set([
+const VAULT_ORDER = [
   'Herbalism-Vault',
   'Vegetable-Vault',
   'Fruit-Berry-Vault',
-  'Wildflower-Vault'
-]);
-
-const CATEGORY_ORDER = ['all', 'Herbs', 'Vegetables', 'Fruits', 'Berries', 'Wildflowers'];
+  'Wildflower-Vault',
+  'Master-Indexes',
+  'Quick Start Guides',
+  'Templates'
+];
 
 const els = {
   vaultNav: document.getElementById('vaultNav'),
-  searchInput: document.getElementById('searchInput'),
   sortSelect: document.getElementById('sortSelect'),
-  resetBtn: document.getElementById('resetBtn'),
+  typeSelect: document.getElementById('typeSelect'),
+  searchInput: document.getElementById('searchInput'),
   results: document.getElementById('results'),
   resultsSummary: document.getElementById('resultsSummary'),
+  statusBox: document.getElementById('statusBox'),
+  openSelectedBtn: document.getElementById('openSelectedBtn'),
+  copyPathBtn: document.getElementById('copyPathBtn'),
+  sourceBtn: document.getElementById('sourceBtn'),
+  downloadBtn: document.getElementById('downloadBtn'),
+  resetBtn: document.getElementById('resetBtn'),
+  helpRailBtn: document.getElementById('helpRailBtn'),
   openHelpBtn: document.getElementById('openHelpBtn'),
   noteDialog: document.getElementById('noteDialog'),
   dialogTitle: document.getElementById('dialogTitle'),
@@ -48,174 +57,131 @@ function esc(text) {
 function getBasePath() {
   const { hostname, pathname } = window.location;
   if (!hostname.endsWith('github.io')) return '';
+
   const firstSegment = pathname.split('/').filter(Boolean)[0] || '';
   return firstSegment ? `/${firstSegment}` : '';
 }
 
-function getLifeCycle(item) {
-  const fm = item.frontmatter || {};
-  return String(
-    fm['Life Cycle'] ||
-    fm.lifeCycle ||
-    fm.LifeCycle ||
-    ''
-  ).toLowerCase();
+function vaultLabel(vault) {
+  const match = state.data.find((item) => item.vault === vault);
+  if (match && match.vaultLabel) return match.vaultLabel;
+  return vault.replace('-Vault', '').replace(/-/g, ' ');
 }
 
-function isBerry(item) {
-  const text = [
-    item.title,
-    item.path,
-    (item.tags || []).join(' '),
-    item.raw
-  ].join(' ').toLowerCase();
-
-  return /(berry|blueberry|blackberry|raspberry|strawberry|elderberry|cranberry|goji)/.test(text);
+function getSelectedItem() {
+  if (!state.selectedId) return null;
+  return state.data.find((item) => item.id === state.selectedId) || null;
 }
 
-function categoryOf(item) {
-  if (item.vault === 'Herbalism-Vault') return 'Herbs';
-  if (item.vault === 'Vegetable-Vault') return 'Vegetables';
-  if (item.vault === 'Wildflower-Vault') return 'Wildflowers';
-  if (item.vault === 'Fruit-Berry-Vault') return isBerry(item) ? 'Berries' : 'Fruits';
-  return 'Other';
-}
+function quickMatch(item, quick) {
+  if (quick === 'all') return true;
 
-function isPlantType(item) {
   const type = String(item.type || '').toLowerCase();
   const section = String(item.section || '').toLowerCase();
-  return ['herb', 'vegetable', 'fruit', 'flower', 'wildflower'].some((token) => type.includes(token)) ||
-    section.includes('plants') ||
-    section.includes('crops');
-}
+  const vault = String(item.vault || '').toLowerCase();
 
-function isIndex(item) {
-  const type = String(item.type || '').toLowerCase();
-  const section = String(item.section || '').toLowerCase();
-  return type.includes('index') || section.includes('index') || item.vault === 'Master-Indexes';
-}
+  if (quick === 'plants') {
+    return ['herb', 'vegetable', 'fruit', 'flower', 'wildflower'].some((token) => type.includes(token));
+  }
 
-function isGuide(item) {
-  const type = String(item.type || '').toLowerCase();
-  const section = String(item.section || '').toLowerCase();
-  return type.includes('guide') ||
-    section.includes('guide') ||
-    section.includes('apothecary') ||
-    section.includes('preparations') ||
-    section.includes('planting') ||
-    item.vault === 'Quick Start Guides' ||
-    item.vault === 'Templates';
-}
+  if (quick === 'indexes') {
+    return type.includes('index') || section.includes('index') || vault.includes('master-index');
+  }
 
-function matchesLifeCycle(item) {
-  if (state.life === 'all') return true;
-  const life = getLifeCycle(item);
-  if (!life) return false;
-  if (state.life === 'annual') return life.includes('annual');
-  if (state.life === 'perennial') return life.includes('perennial');
+  if (quick === 'guides') {
+    return type.includes('guide') ||
+      section.includes('guide') ||
+      section.includes('preparation') ||
+      section.includes('planting') ||
+      vault.includes('quick start guides');
+  }
+
   return true;
 }
 
-function baseScope() {
-  if (state.quick === 'indexes') {
-    return state.data.filter((item) => isIndex(item));
-  }
+function sortItems(items) {
+  const sorted = [...items];
 
-  if (state.quick === 'guides') {
-    return state.data.filter((item) => isGuide(item));
-  }
+  sorted.sort((a, b) => {
+    if (state.sort === 'title-asc') return a.title.localeCompare(b.title);
+    if (state.sort === 'title-desc') return b.title.localeCompare(a.title);
+    if (state.sort === 'vault-asc') return a.vault.localeCompare(b.vault) || a.title.localeCompare(b.title);
+    if (state.sort === 'type-asc') return String(a.type).localeCompare(String(b.type)) || a.title.localeCompare(b.title);
+    if (state.sort === 'section-asc') return String(a.section).localeCompare(String(b.section)) || a.title.localeCompare(b.title);
+    return 0;
+  });
 
-  if (state.quick === 'plants') {
-    return state.data.filter((item) => PLANT_VAULTS.has(item.vault) && isPlantType(item));
-  }
-
-  return state.data.filter((item) => PLANT_VAULTS.has(item.vault));
-}
-
-function searchScore(item, query) {
-  if (!query) return 0;
-
-  const q = query.toLowerCase();
-  const title = String(item.title || '').toLowerCase();
-  const category = categoryOf(item).toLowerCase();
-  const tags = (item.tags || []).join(' ').toLowerCase();
-  const excerpt = String(item.excerpt || '').toLowerCase();
-  const raw = String(item.raw || '').toLowerCase();
-  const path = String(item.path || '').toLowerCase();
-
-  let score = 0;
-
-  if (title === q) score += 600;
-  if (title.startsWith(q)) score += 320;
-  if (title.includes(q)) score += 220;
-  if (category.includes(q)) score += 120;
-  if (tags.includes(q)) score += 100;
-  if (excerpt.includes(q)) score += 55;
-  if (raw.includes(q)) score += 25;
-  if (path.includes(q)) score += 15;
-
-  return score;
-}
-
-function bySort(a, b) {
-  if (state.query && state.sort === 'relevance') {
-    return b._score - a._score || a.title.localeCompare(b.title);
-  }
-  if (state.sort === 'title-asc') return a.title.localeCompare(b.title);
-  if (state.sort === 'title-desc') return b.title.localeCompare(a.title);
-  if (state.sort === 'category-asc') return categoryOf(a).localeCompare(categoryOf(b)) || a.title.localeCompare(b.title);
-  return a.title.localeCompare(b.title);
-}
-
-function currentScopeWithQuery() {
-  const query = state.query.trim().toLowerCase();
-  let items = baseScope().filter((item) => matchesLifeCycle(item));
-
-  if (state.vaultCategory !== 'all') {
-    items = items.filter((item) => categoryOf(item) === state.vaultCategory);
-  }
-
-  if (!query) {
-    return items.map((item) => ({ ...item, _score: 0 }));
-  }
-
-  const scored = items
-    .map((item) => ({ ...item, _score: searchScore(item, query) }))
-    .filter((item) => item._score > 0);
-
-  return scored;
+  return sorted;
 }
 
 function applyFilters() {
-  state.filtered = currentScopeWithQuery().sort(bySort);
+  const query = state.query.trim().toLowerCase();
+
+  const filtered = state.data.filter((item) => {
+    if (state.vault !== 'all' && item.vault !== state.vault) return false;
+    if (state.type !== 'all' && String(item.type) !== state.type) return false;
+    if (!quickMatch(item, state.quick)) return false;
+    if (!query) return true;
+
+    const haystack = [
+      item.title,
+      item.type,
+      item.section,
+      item.excerpt,
+      item.raw,
+      item.path,
+      item.tags.join(' '),
+      Object.values(item.frontmatter || {}).join(' ')
+    ].join(' ').toLowerCase();
+
+    return haystack.includes(query);
+  });
+
+  state.filtered = sortItems(filtered);
+
+  if (!state.filtered.some((item) => item.id === state.selectedId)) {
+    state.selectedId = state.filtered[0] ? state.filtered[0].id : null;
+  }
 }
 
 function renderVaultNav() {
-  const scoped = baseScope().filter((item) => matchesLifeCycle(item));
-  const query = state.query.trim().toLowerCase();
-  const queryScoped = query
-    ? scoped.filter((item) => searchScore(item, query) > 0)
-    : scoped;
-
   const counts = new Map();
-  queryScoped.forEach((item) => {
-    const cat = categoryOf(item);
-    if (cat === 'Other') return;
-    counts.set(cat, (counts.get(cat) || 0) + 1);
+  state.data.forEach((item) => counts.set(item.vault, (counts.get(item.vault) || 0) + 1));
+
+  const orderedVaults = [...counts.keys()].sort((a, b) => {
+    const aPos = VAULT_ORDER.indexOf(a);
+    const bPos = VAULT_ORDER.indexOf(b);
+
+    if (aPos === -1 && bPos === -1) return a.localeCompare(b);
+    if (aPos === -1) return 1;
+    if (bPos === -1) return -1;
+    return aPos - bPos;
   });
 
   const rows = [
-    `<button type="button" class="vault-btn ${state.vaultCategory === 'all' ? 'active' : ''}" data-vault-category="all">All (${queryScoped.length})</button>`
+    `<button type="button" class="menu-item ${state.vault === 'all' ? 'active' : ''}" data-vault="all">All Documents (${state.data.length})</button>`
   ];
 
-  CATEGORY_ORDER.filter((item) => item !== 'all').forEach((category) => {
-    const count = counts.get(category) || 0;
+  orderedVaults.forEach((vault) => {
+    const count = counts.get(vault) || 0;
     rows.push(
-      `<button type="button" class="vault-btn ${state.vaultCategory === category ? 'active' : ''}" data-vault-category="${esc(category)}">${esc(category)} (${count})</button>`
+      `<button type="button" class="menu-item ${state.vault === vault ? 'active' : ''}" data-vault="${esc(vault)}">${esc(vaultLabel(vault))} (${count})</button>`
     );
   });
 
   els.vaultNav.innerHTML = rows.join('');
+}
+
+function renderTypeOptions() {
+  const types = [...new Set(state.data.map((item) => String(item.type || '').trim()).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b));
+
+  els.typeSelect.innerHTML = [
+    '<option value="all">All Types</option>',
+    ...types.map((type) => `<option value="${esc(type)}">${esc(type)}</option>`)
+  ].join('');
+
+  els.typeSelect.value = state.type;
 }
 
 function renderResults() {
@@ -226,21 +192,22 @@ function renderResults() {
     els.results.innerHTML = `
       <div class="empty">
         <h3>No matching notes</h3>
-        <p>Try a shorter search phrase or reset filters.</p>
+        <p>Adjust vault, search, type, quick filters, or sorting.</p>
       </div>
     `;
     return;
   }
 
-  els.results.innerHTML = state.filtered.map((item) => {
+  els.results.innerHTML = state.filtered.map((item, index) => {
+    const selected = item.id === state.selectedId ? 'selected' : '';
+    const excerpt = esc(item.excerpt || 'No excerpt available.');
+    const meta = [item.vaultLabel || vaultLabel(item.vault), item.type, item.section].filter(Boolean);
+
     return `
-      <button type="button" class="result-card" data-id="${esc(item.id)}" role="listitem">
+      <button type="button" class="result-card ${selected}" data-id="${esc(item.id)}" style="--i:${index};" role="listitem">
         <div class="result-title">${esc(item.title)}</div>
-        <div class="result-meta">
-          <span class="chip">${esc(categoryOf(item))}</span>
-          <span class="chip">${esc(item.type || 'Note')}</span>
-        </div>
-        <div class="result-excerpt">${esc(item.excerpt || '')}</div>
+        <div class="result-meta">${meta.map((tag) => `<span class="chip">${esc(tag)}</span>`).join('')}</div>
+        <div class="result-excerpt">${excerpt}</div>
         <div class="result-path">${esc(item.path)}</div>
       </button>
     `;
@@ -248,9 +215,16 @@ function renderResults() {
 }
 
 function updateSummary() {
-  const cycleLabel = state.life === 'all' ? 'all life cycles' : state.life;
-  const quickLabel = state.quick;
-  els.resultsSummary.textContent = `Showing ${state.filtered.length} results (${quickLabel}, ${cycleLabel}). Click any result to open directly.`;
+  const scope = state.vault === 'all' ? 'all vaults' : vaultLabel(state.vault);
+  els.resultsSummary.textContent = `Showing ${state.filtered.length} of ${state.data.length} notes in ${scope}.`;
+
+  const selected = getSelectedItem();
+  if (!selected) {
+    els.statusBox.textContent = 'No note selected. Click any result to choose one.';
+    return;
+  }
+
+  els.statusBox.textContent = `Selected: ${selected.title} (${selected.vaultLabel || vaultLabel(selected.vault)})`;
 }
 
 function applyAndRender() {
@@ -262,9 +236,10 @@ function applyAndRender() {
 
 function markdownMetaChips(item) {
   const parts = [
-    categoryOf(item),
-    item.type || null,
-    getLifeCycle(item) ? `Life Cycle: ${getLifeCycle(item)}` : null,
+    item.vaultLabel || vaultLabel(item.vault),
+    item.type,
+    item.section,
+    item.zone ? `Zone ${item.zone}` : null,
     item.startMonth ? `Start: ${item.startMonth}` : null,
     item.harvest ? `Harvest: ${item.harvest}` : null
   ].filter(Boolean);
@@ -274,44 +249,90 @@ function markdownMetaChips(item) {
 
 function openNote(item) {
   if (!item) return;
+
   els.dialogTitle.textContent = item.title;
-  els.dialogMeta.innerHTML = markdownMetaChips(item);
+  els.dialogMeta.innerHTML = markdownMetaChips(item) + `<span class="chip">${esc(item.path)}</span>`;
   els.dialogBody.innerHTML = item.html || '<p>No content.</p>';
   els.noteDialog.showModal();
 }
 
+function repoLinkFor(item) {
+  const { hostname, pathname } = window.location;
+
+  if (hostname.endsWith('github.io')) {
+    const owner = hostname.split('.')[0];
+    const repo = pathname.split('/').filter(Boolean)[0] || 'Gardening-Vault';
+    return `https://github.com/${owner}/${repo}/blob/main/${encodeURI(item.path)}`;
+  }
+
+  return `https://github.com/robosuit/Gardening-Vault/blob/main/${encodeURI(item.path)}`;
+}
+
+async function copySelectedPath() {
+  const selected = getSelectedItem();
+  if (!selected) return;
+
+  try {
+    await navigator.clipboard.writeText(selected.path);
+    els.statusBox.textContent = `Copied path: ${selected.path}`;
+  } catch (error) {
+    els.statusBox.textContent = 'Clipboard copy failed in this browser context.';
+    console.error(error);
+  }
+}
+
+function downloadFilteredData() {
+  const payload = JSON.stringify(state.filtered, null, 2);
+  const blob = new Blob([payload], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'gardening-vault-filtered.json';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function setView(view) {
+  state.view = view;
+  document.querySelectorAll('[data-view]').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.view === view);
+  });
+  renderResults();
+}
+
+function setQuick(quick) {
+  state.quick = quick;
+  document.querySelectorAll('[data-quick]').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.quick === quick);
+  });
+  applyAndRender();
+}
+
 function resetFilters() {
-  state.vaultCategory = 'all';
+  state.vault = 'all';
   state.quick = 'all';
-  state.life = 'all';
-  state.view = 'cards';
   state.query = '';
-  state.sort = 'relevance';
+  state.type = 'all';
+  state.sort = 'title-asc';
 
   els.searchInput.value = '';
-  els.sortSelect.value = 'relevance';
+  els.sortSelect.value = 'title-asc';
+  els.typeSelect.value = 'all';
 
-  document.querySelectorAll('[data-quick]').forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.quick === 'all');
-  });
-
-  document.querySelectorAll('[data-view]').forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.view === 'cards');
-  });
-
-  document.querySelectorAll('[data-life]').forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.life === 'all');
-  });
-
-  applyAndRender();
+  setQuick('all');
 }
 
 async function loadData() {
   const basePath = getBasePath();
+
   try {
     const response = await fetch(`${basePath}/data/plants.json`);
     if (!response.ok) throw new Error(`Could not load data (${response.status})`);
+
     state.data = await response.json();
+    renderTypeOptions();
     applyAndRender();
   } catch (error) {
     els.results.innerHTML = `
@@ -320,16 +341,32 @@ async function loadData() {
         <p>${esc(error.message)}</p>
       </div>
     `;
+    els.statusBox.textContent = 'Build the JSON with npm run build-data and reload.';
     console.error(error);
   }
 }
 
 function wireEvents() {
   els.vaultNav.addEventListener('click', (event) => {
-    const button = event.target.closest('[data-vault-category]');
+    const button = event.target.closest('[data-vault]');
     if (!button) return;
-    state.vaultCategory = button.dataset.vaultCategory;
+    state.vault = button.dataset.vault;
     applyAndRender();
+  });
+
+  els.results.addEventListener('click', (event) => {
+    const card = event.target.closest('.result-card');
+    if (!card) return;
+    state.selectedId = card.dataset.id;
+    renderResults();
+    updateSummary();
+  });
+
+  els.results.addEventListener('dblclick', (event) => {
+    const card = event.target.closest('.result-card');
+    if (!card) return;
+    const item = state.data.find((entry) => entry.id === card.dataset.id);
+    openNote(item);
   });
 
   els.searchInput.addEventListener('input', (event) => {
@@ -342,39 +379,34 @@ function wireEvents() {
     applyAndRender();
   });
 
+  els.typeSelect.addEventListener('change', (event) => {
+    state.type = event.target.value;
+    applyAndRender();
+  });
+
   document.querySelectorAll('[data-quick]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      state.quick = btn.dataset.quick;
-      document.querySelectorAll('[data-quick]').forEach((x) => x.classList.toggle('active', x === btn));
-      applyAndRender();
-    });
+    btn.addEventListener('click', () => setQuick(btn.dataset.quick));
   });
 
   document.querySelectorAll('[data-view]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      state.view = btn.dataset.view;
-      document.querySelectorAll('[data-view]').forEach((x) => x.classList.toggle('active', x === btn));
-      renderResults();
-    });
+    btn.addEventListener('click', () => setView(btn.dataset.view));
   });
 
-  document.querySelectorAll('[data-life]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      state.life = btn.dataset.life;
-      document.querySelectorAll('[data-life]').forEach((x) => x.classList.toggle('active', x === btn));
-      applyAndRender();
-    });
+  els.openSelectedBtn.addEventListener('click', () => openNote(getSelectedItem()));
+  els.copyPathBtn.addEventListener('click', () => copySelectedPath());
+
+  els.sourceBtn.addEventListener('click', () => {
+    const selected = getSelectedItem();
+    if (!selected) return;
+    window.open(repoLinkFor(selected), '_blank', 'noopener');
   });
 
-  els.results.addEventListener('click', (event) => {
-    const card = event.target.closest('.result-card');
-    if (!card) return;
-    const item = state.filtered.find((entry) => entry.id === card.dataset.id);
-    openNote(item);
-  });
-
+  els.downloadBtn.addEventListener('click', downloadFilteredData);
   els.resetBtn.addEventListener('click', resetFilters);
+
   els.openHelpBtn.addEventListener('click', () => els.helpDialog.showModal());
+  els.helpRailBtn.addEventListener('click', () => els.helpDialog.showModal());
+
   els.closeNoteDialog.addEventListener('click', () => els.noteDialog.close());
   els.closeHelpDialog.addEventListener('click', () => els.helpDialog.close());
 }

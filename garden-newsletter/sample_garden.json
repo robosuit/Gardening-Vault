@@ -1,0 +1,4 @@
+{
+  "notes": "This is a sample garden data file used when no GitHub token is available.",
+  "plants": ["lettuce", "tomato", "carrot"]
+}

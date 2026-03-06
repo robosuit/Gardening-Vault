@@ -1,0 +1,8 @@
+{
+  "list": [
+    {"dt_txt": "2026-02-25 09:00:00", "main": {"temp": 55}, "weather": [{"description": "clear sky"}]},
+    {"dt_txt": "2026-02-25 12:00:00", "main": {"temp": 56}, "weather": [{"description": "few clouds"}]},
+    {"dt_txt": "2026-02-25 15:00:00", "main": {"temp": 57}, "weather": [{"description": "scattered clouds"}]},
+    {"dt_txt": "2026-02-25 18:00:00", "main": {"temp": 57}, "weather": [{"description": "broken clouds"}]}
+  ]
+}

@@ -11,6 +11,7 @@ const MONTHS = [
   'october',
   'november',
   'december'
+  
 ];
 
 const state = {
